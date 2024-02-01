@@ -1,0 +1,8 @@
+.task-container {
+  background-color: rgb(174, 174, 230);
+  justify-content: center;
+}
+.task {
+  display: flex;
+  align-items: center;
+}
