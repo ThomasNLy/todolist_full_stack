@@ -27,6 +27,8 @@ function App() {
   }, []);
 
   async function postTask() {
+    let dateTaskCreated = new Date();
+    dateTaskCreated = dateTaskCreated.toISOString();
     await fetch("http://localHost:8000/todos", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -34,6 +36,7 @@ function App() {
         title: newTask.title,
         description: newTask.description,
         completed: false,
+        date: dateTaskCreated,
       }),
     })
       .then((response) => response.json())
@@ -51,6 +54,7 @@ function App() {
         title: taskItem.title,
         description: taskItem.description,
         completed: taskItem.completed,
+        date: taskItem.date,
       }),
     })
       .then((response) => {
@@ -68,6 +72,7 @@ function App() {
       title: taskItem.title,
       description: taskItem.description,
       completed: taskItem.completed,
+      date: taskItem.date,
     });
 
     await fetch("http://localHost:8000/todos", {
@@ -83,7 +88,12 @@ function App() {
   }
 
   function updateListOfTaskAfterDeletingOne(taskToDelete) {
-    const newList = tasks.filter((task) => task.title !== taskToDelete.title);
+    const newList = tasks.filter(
+      (task) =>
+        new Date(task.date).getTime() !==
+          new Date(taskToDelete.date).getTime() &&
+        task.title !== taskToDelete.title
+    );
     setTasks(newList);
   }
 
@@ -96,6 +106,7 @@ function App() {
           title={t.title}
           description={t.description}
           completed={t.completed}
+          date={t.date}
           deleteTask={deleteTask}
           updateTask={updateTask}
         />

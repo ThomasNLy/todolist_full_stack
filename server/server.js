@@ -36,6 +36,7 @@ app.post("/todos", async (req, res) => {
     title: req.body.title,
     description: req.body.description,
     completed: req.body.completed,
+    date: req.body.date,
   });
 
   await addNewItem
@@ -51,6 +52,7 @@ app.put("/todos", async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       completed: req.body.completed,
+      date: req.body.date,
     })
     .then(async () => {
       res.json(await todoDoc.find());
@@ -61,7 +63,6 @@ app.delete("/todos", async (req, res) => {
   let id = req.body.id;
   let deletedItem = await todoDoc.findByIdAndDelete(id);
 
-  // console.log(`deleted: ${deletedItem}`);
   res.json(`deleted : ${deletedItem}`);
 });
 

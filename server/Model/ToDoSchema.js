@@ -4,6 +4,7 @@ const todoSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: String,
   completed: { type: Boolean, default: false },
+  date: { type: Date, required: true },
 });
 
 module.exports = todoSchema;
