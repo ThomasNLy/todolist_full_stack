@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React from "react";
 import "./AddTask.css";
 
 function AddTask({ submitFunction, settingNewTask }) {
@@ -16,9 +16,19 @@ function AddTask({ submitFunction, settingNewTask }) {
   return (
     <form>
       <label htmlFor="title">
-        <input type="text" name="title" id="title" onChange={handleChange} className="inputField"/>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          onChange={handleChange}
+          className="inputField"
+        />
       </label>
-      <button type="submit" onClick={submittingPost} className="add-task-button">
+      <button
+        type="submit"
+        onClick={submittingPost}
+        className="add-task-button"
+      >
         Add Task
       </button>
     </form>
