@@ -6,18 +6,25 @@
   display: grid;
   grid-template-columns: 1fr 50% 1fr;
 }
+.task-container :nth-child(3) {
+  justify-self: right;
+  margin-right: 2.2em;
+}
 
 .checkbox {
   width: 2em;
   height: 2em;
   margin-left: 2em;
+  margin-bottom: 2em;
 }
 .delete-button {
-  padding: 1em;
+  width: 3em;
+  height: 2.5em;
   background-color: #f8d092;
   border-width: 0em;
   border-radius: 1em;
-  margin-right: 1em;
+
+  margin-bottom: 2em;
 }
 .task {
   color: white;

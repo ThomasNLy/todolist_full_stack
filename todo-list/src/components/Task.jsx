@@ -45,7 +45,7 @@ function Task({ id, title, description, completed, deleteTask, updateTask }) {
         </p>
       </div>
       <button type="button" onClick={handleOnclick} className="delete-button">
-        <FontAwesomeIcon icon={faX} />
+        <FontAwesomeIcon icon={faX} inverse />
       </button>
     </div>
   );

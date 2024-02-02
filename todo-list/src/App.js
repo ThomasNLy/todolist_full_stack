@@ -7,7 +7,7 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState({
     title: "",
-    description: "",
+    description: "desc",
     completed: "",
   });
 
@@ -32,7 +32,7 @@ function App() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         title: newTask.title,
-        description: "desc",
+        description: newTask.description,
         completed: false,
       }),
     })
@@ -111,7 +111,11 @@ function App() {
 
   return (
     <div className="body-container">
-      <AddTask submitFunction={addNewTask} settingNewTask={setNewTask} />
+      <AddTask
+        submitFunction={addNewTask}
+        settingNewTask={setNewTask}
+        taskObject={newTask}
+      />
       <div className="task-list-container">{taskList}</div>
     </div>
   );
