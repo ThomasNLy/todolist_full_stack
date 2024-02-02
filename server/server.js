@@ -9,9 +9,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 const port = 8000;
-console.log(process.env);
-const dbPassword = process.env.Password;
-console.log(process.env.Password);
+//console.log(process.env);
+ const dbPassword = process.env.PASSWORD;
+
 const uri = `mongodb+srv://practice:${dbPassword}@cluster0.itzhbvq.mongodb.net/`;
 //const uri = `mongodb+srv://practice:practice@cluster0.itzhbvq.mongodb.net/`;
 mongoose

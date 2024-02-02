@@ -110,7 +110,7 @@ function App() {
   let taskList = listOfTask();
 
   return (
-    <div>
+    <div className="body-container">
       <AddTask submitFunction={addNewTask} settingNewTask={setNewTask} />
       {taskList}
     </div>
