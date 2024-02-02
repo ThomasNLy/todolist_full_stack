@@ -1,5 +1,7 @@
 import React from "react";
 import "./Task.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 function Task({ id, title, description, completed, deleteTask, updateTask }) {
   let taskItem = {
     id: id,
@@ -19,21 +21,23 @@ function Task({ id, title, description, completed, deleteTask, updateTask }) {
 
   return (
     <div className="task-container">
-      <h2>{title}</h2>
-
-      <div className="task">
-        <p>{description}</p>
+      <div>
+        <label htmlFor="taskcompleted"></label>
         <input
+          className="checkbox"
           type="checkbox"
           name="taskcompleted"
           id="taskcompleted"
           onChange={handleOnChangeEvent}
           defaultChecked={completed}
         />
-        <label htmlFor="taskcompleted">completed</label>
       </div>
-      <button type="button" onClick={handleOnclick}>
-        Delete
+      <div className="task">
+        <h2>{title}</h2>
+        <p>{description}</p>
+      </div>
+      <button type="button" onClick={handleOnclick} className="delete-button">
+        <FontAwesomeIcon icon={faX} />
       </button>
     </div>
   );

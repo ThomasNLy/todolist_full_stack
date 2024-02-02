@@ -1,8 +1,24 @@
 .task-container {
-  background-color: rgb(174, 174, 230);
-  justify-content: center;
+  background-color: #159097;
+
+  align-items: center;
+
+  display: grid;
+  grid-template-columns: 1fr 50% 1fr;
+}
+
+.checkbox {
+  width: 2em;
+  height: 2em;
+  margin-left: 2em;
+}
+.delete-button {
+  padding: 1em;
+  background-color: #f8d092;
+  border-width: 0em;
+  border-radius: 1em;
+  margin-right: 1em;
 }
 .task {
-  display: flex;
-  align-items: center;
+  color: white;
 }

@@ -112,7 +112,7 @@ function App() {
   return (
     <div className="body-container">
       <AddTask submitFunction={addNewTask} settingNewTask={setNewTask} />
-      {taskList}
+      <div className="task-list-container">{taskList}</div>
     </div>
   );
 }
