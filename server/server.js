@@ -38,7 +38,10 @@ app.post("/todos", async (req, res) => {
     completed: req.body.completed,
   });
 
-  await addNewItem.save().then(() => res.json(addNewItem));
+  await addNewItem
+    .save()
+    .then(() => res.json(addNewItem))
+    .catch((err) => console.log(`${err}\n invalid data format}`));
 });
 
 app.put("/todos", async (req, res) => {
