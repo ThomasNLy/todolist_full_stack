@@ -87,6 +87,7 @@ function App() {
       .catch((err) => console.log(err));
   }
 
+  //filter doesn't work for more than 1 condition fix later
   function updateListOfTaskAfterDeletingOne(taskToDelete) {
     const newList = tasks.filter(
       (task) =>
