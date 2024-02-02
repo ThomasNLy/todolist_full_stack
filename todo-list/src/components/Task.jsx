@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Task.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
@@ -9,12 +9,16 @@ function Task({ id, title, description, completed, deleteTask, updateTask }) {
     description: description,
     completed: completed,
   };
+
+  const [taskCompleted, setTaskCompleted] = useState(completed);
+
   async function handleOnclick(event) {
     deleteTask(taskItem);
   }
 
   async function handleOnChangeEvent(event) {
     console.log(event.target.checked);
+    setTaskCompleted(event.target.checked);
     taskItem.completed = event.target.checked;
     updateTask(taskItem);
   }
@@ -33,8 +37,12 @@ function Task({ id, title, description, completed, deleteTask, updateTask }) {
         />
       </div>
       <div className="task">
-        <h2>{title}</h2>
-        <p>{description}</p>
+        <h2 className={taskCompleted ? "task-completed" : "task-not-completed"}>
+          {title}
+        </h2>
+        <p className={taskCompleted ? "task-completed" : "task-not-completed"}>
+          {description}
+        </p>
       </div>
       <button type="button" onClick={handleOnclick} className="delete-button">
         <FontAwesomeIcon icon={faX} />
