@@ -13,7 +13,7 @@ const port = 8000;
 const dbPassword = process.env.PASSWORD;
 
 const uri = `mongodb+srv://practice:${dbPassword}@cluster0.itzhbvq.mongodb.net/`;
-//const uri = `mongodb+srv://practice:practice@cluster0.itzhbvq.mongodb.net/`;
+
 mongoose
   .connect(uri, { dbName: "tasks_to_do" })
   .then(() => console.log("success connected"))
