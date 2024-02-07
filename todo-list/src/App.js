@@ -6,6 +6,8 @@ import React, { useState, useEffect } from "react";
 function App() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState({
+    _id:"",
+    taskid:"",
     title: "",
     description: "desc",
     completed: "",
@@ -27,13 +29,17 @@ function App() {
   }, []);
 
   async function postTask() {
+    let dateTaskCreated = new Date();
+    dateTaskCreated = dateTaskCreated.toISOString();
     await fetch("http://localHost:8000/todos", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        taskid: `${newTask.title}${dateTaskCreated}`,
         title: newTask.title,
         description: newTask.description,
         completed: false,
+        date: dateTaskCreated,
       }),
     })
       .then((response) => response.json())
@@ -42,15 +48,28 @@ function App() {
       .catch((err) => console.log(err));
   }
 
+  /**
+   * 
+   * @param {object} taskItem a newTask object required to delete it's entry from the todo list and database
+   * newTaskItems have the following fields, 
+   * _id: database id
+   * taskid: unique id for the task,
+   * title: the title
+   * description: desc
+   * date: date it was created
+   * compeleted: boolean value for task completion
+   */
   async function deleteTask(taskItem) {
     await fetch("http://localHost:8000/todos", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        id: taskItem.id,
+        _id: taskItem._id,
+        taskid: taskItem.taskid,
         title: taskItem.title,
         description: taskItem.description,
         completed: taskItem.completed,
+        date: taskItem.date,
       }),
     })
       .then((response) => {
@@ -62,12 +81,18 @@ function App() {
       });
   }
 
+  /**
+   * 
+   * @param {object} taskItem, a newTask object required to update the task's information such as  compeletion status
+   */
   async function updateTask(taskItem) {
     const updatedTask = await JSON.stringify({
-      id: taskItem.id,
+      _id: taskItem._id,
+      taskid: taskItem.taskid,
       title: taskItem.title,
       description: taskItem.description,
       completed: taskItem.completed,
+      date: taskItem.date,
     });
 
     await fetch("http://localHost:8000/todos", {
@@ -82,8 +107,14 @@ function App() {
       .catch((err) => console.log(err));
   }
 
+  /**
+   * 
+   * @param {object} taskToDelete a newTask object used to filter out from current list of tasks that display on the screen 
+   */
   function updateListOfTaskAfterDeletingOne(taskToDelete) {
-    const newList = tasks.filter((task) => task.title !== taskToDelete.title);
+    const newList = tasks.filter(
+      (task) => task.taskid !== taskToDelete.taskid
+    );
     setTasks(newList);
   }
 
@@ -92,10 +123,12 @@ function App() {
       return (
         <Task
           key={t._id}
-          id={t._id}
+          _id={t._id}
+          taskid={t.taskid}
           title={t.title}
           description={t.description}
           completed={t.completed}
+          date={t.date}
           deleteTask={deleteTask}
           updateTask={updateTask}
         />

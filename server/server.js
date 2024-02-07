@@ -9,11 +9,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 const port = 8000;
-//console.log(process.env);
 const dbPassword = process.env.PASSWORD;
 
 const uri = `mongodb+srv://practice:${dbPassword}@cluster0.itzhbvq.mongodb.net/`;
-//const uri = `mongodb+srv://practice:practice@cluster0.itzhbvq.mongodb.net/`;
+
 mongoose
   .connect(uri, { dbName: "tasks_to_do" })
   .then(() => console.log("success connected"))
@@ -33,9 +32,11 @@ app.get("/todos", async (req, res) => {
 
 app.post("/todos", async (req, res) => {
   let addNewItem = new todoDoc({
+    taskid: req.body.taskid,
     title: req.body.title,
     description: req.body.description,
     completed: req.body.completed,
+    date: req.body.date,
   });
 
   await addNewItem
@@ -45,12 +46,13 @@ app.post("/todos", async (req, res) => {
 });
 
 app.put("/todos", async (req, res) => {
-  let id = req.body.id;
+  let databaseid = req.body._id;
   await todoDoc
-    .findByIdAndUpdate(id, {
+    .findByIdAndUpdate(databaseid, {
       title: req.body.title,
       description: req.body.description,
       completed: req.body.completed,
+      date: req.body.date,
     })
     .then(async () => {
       res.json(await todoDoc.find());
@@ -58,10 +60,9 @@ app.put("/todos", async (req, res) => {
 });
 
 app.delete("/todos", async (req, res) => {
-  let id = req.body.id;
-  let deletedItem = await todoDoc.findByIdAndDelete(id);
+  let databaseid = req.body._id;
+  let deletedItem = await todoDoc.findByIdAndDelete(databaseid);
 
-  // console.log(`deleted: ${deletedItem}`);
   res.json(`deleted : ${deletedItem}`);
 });
 

@@ -2,13 +2,28 @@ import React, { useState } from "react";
 import "./Task.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
-function Task({ id, title, description, completed, deleteTask, updateTask }) {
+function Task({
+  _id,
+  taskid,
+  title,
+  description,
+  completed,
+  date,
+  deleteTask,
+  updateTask,
+}) {
+  
+
   let taskItem = {
-    id: id,
+    _id: _id,
+    taskid: taskid,
     title: title,
     description: description,
     completed: completed,
+    date: date
   };
+
+
 
   const [taskCompleted, setTaskCompleted] = useState(completed);
 
@@ -43,6 +58,8 @@ function Task({ id, title, description, completed, deleteTask, updateTask }) {
         <p className={taskCompleted ? "task-completed" : "task-not-completed"}>
           {description}
         </p>
+        <p>{date.split('T')[0]}</p>
+        <p>{taskid}</p>
       </div>
       <button type="button" onClick={handleOnclick} className="delete-button">
         <FontAwesomeIcon icon={faX} inverse />
