@@ -9,6 +9,10 @@
   width: 90%;
   padding-left: 0.5em;
 }
+textarea.inputField {
+  resize:none;
+}
+
 .task-input-fields-container {
   display: flex;
   flex-direction: column;
