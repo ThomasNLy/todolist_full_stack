@@ -1,0 +1,37 @@
+.inputField {
+  background-color: rgb(205, 205, 205);
+  border-radius: 2%;
+  border-width: 0em;
+  border-color: rgb(205, 205, 205);
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  font-size: 1.4rem;
+  width: 90%;
+  padding-left: 0.5em;
+}
+textarea.inputField {
+  resize:none;
+}
+
+.task-input-fields-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5em;
+}
+form {
+  display: grid;
+  grid-template-columns: 1fr 30%;
+
+  justify-items: center;
+
+  column-gap: 0.5em;
+}
+.add-task-button {
+  border-radius: 0.4em;
+  border-width: 0.1em;
+  border-color: rgb(145, 145, 212);
+  background-color: rgb(145, 145, 212);
+  color: rgb(219, 219, 219);
+  padding: 0.2em 1.5em;
+  height: 2em;
+}
